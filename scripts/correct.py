@@ -42,6 +42,11 @@ class AloeReferencer(scripts.Script):
         return None
 
     def run(self, directory, reference_image):
+        print("Directory: ", directory)
+        print("Reference Image: ", type(reference_image))
+
+        print("Enabled status: ", self.enabled)
+
         weight = 0.5  # Default value
 
         if self.enabled:
@@ -54,21 +59,39 @@ class AloeReferencer(scripts.Script):
                 print('No images found in the directory.')
                 return
 
+            print("Last Image Path: ", last_image_path)
+
             # Load the last image
             last_image = cv2.imread(last_image_path)
+            print("Last Image: ", type(last_image))
 
-            # Adjust the last image to match the reference image
-            adjusted_img = adjust_image_to_reference(last_image, reference_img)
+            # Check if adjust_image_to_reference function exists
+            try:
+                # Adjust the last image to match the reference image
+                adjusted_img = adjust_image_to_reference(last_image, reference_img)
+            except NameError:
+                print("Function adjust_image_to_reference not found.")
+                return
+
             # Convert back to PIL Image for further enhancements
             adjusted_img_pil = Image.fromarray(cv2.cvtColor(adjusted_img, cv2.COLOR_BGR2RGB))
-            # Apply contrast and sharpness with weight
-            final_img = apply_contrast_and_sharpness(adjusted_img_pil, weight, weight)
+
+            # Check if apply_contrast_and_sharpness function exists
+            try:
+                # Apply contrast and sharpness with weight
+                final_img = apply_contrast_and_sharpness(adjusted_img_pil, weight, weight)
+            except NameError:
+                print("Function apply_contrast_and_sharpness not found.")
+                return
+
             # Save the final image
             final_image_path = os.path.splitext(last_image_path)[0] + '_edit' + os.path.splitext(last_image_path)[1]
             final_img.save(final_image_path)
+
             # Convert final image to Gradio interface format
             final_img = Image.open(final_image_path)
             return final_img
         else:
             print("Script is currently disabled.")
         return None
+
