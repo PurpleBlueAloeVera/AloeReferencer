@@ -36,7 +36,7 @@ class AloeReferencer(scripts.Script):
 
     def get_last_image(self, directory):
         images = os.listdir(directory)
-        images = [image for image in images if image.endswith('.jpg', '.png', '.jpeg')]
+        images = [image for image in images if image.endswith(('.jpg', '.png', '.jpeg'))]
         if len(images) > 0:
             return os.path.join(directory, images[-1])  # Return the latest image in the directory
         return None
