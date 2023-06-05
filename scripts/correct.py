@@ -31,7 +31,7 @@ class AloeReferencer(scripts.Script):
     return [self.directory_input, self.reference_image_input, self.enabled_checkbox, self.run_script_button]
 
 
-    def run(self, self, directory=None, reference_image=None):
+    def run(self, directory=None, reference_image=None):
         print("Directory: ", directory)
         print("Reference Image: ", type(reference_image))
         print("Enabled status: ", self.enabled)
