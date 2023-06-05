@@ -44,8 +44,15 @@ class AloeReferencer(scripts.Script):
     def run(self, directory, reference_image):
         print("Directory: ", directory)
         print("Reference Image: ", type(reference_image))
-
         print("Enabled status: ", self.enabled)
+
+        if directory is None:
+            print("No directory provided.")
+            return
+
+        if reference_image is None:
+            print("No reference image provided.")
+            return
 
         weight = 0.5  # Default value
 
