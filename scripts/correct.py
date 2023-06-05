@@ -28,7 +28,7 @@ class AloeReferencer(scripts.Script):
         self.run_script_button = gr.Button(label="Run script")
         self.run_script_button.click(self.run)
 
-    return [self.directory_input, self.reference_image_input, self.enabled_checkbox, self.run_script_button]
+        return [self.directory_input, self.reference_image_input, self.enabled_checkbox, self.run_script_button]
 
 
     def run(self, directory=None, reference_image=None):
