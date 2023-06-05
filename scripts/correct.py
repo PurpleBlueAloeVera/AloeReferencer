@@ -51,7 +51,7 @@ class AloeReferencer(scripts.Script):
 
         if self.enabled:
             # Load reference image
-            reference_img = cv2.cvtColor(np.array(reference_image), cv2.COLOR_RGB2BGR)
+            reference_img = cv2.cvtColor(np.array(reference_image, dtype=np.uint8), cv2.COLOR_RGB2BGR)
 
             # Get the last image in the directory
             last_image_path = self.get_last_image(directory)
