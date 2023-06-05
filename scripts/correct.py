@@ -22,7 +22,7 @@ class AloeReferencer(scripts.Script):
 
     def ui(self, _=None):
         self.directory_input = gr.inputs.Textbox(label='Path to the images directory', default=None)
-        self.reference_image_input = gr.inputs.Image(label="Upload reference image", default=None)
+        self.reference_image_input = gr.inputs.Image(label="Upload reference image")  # remove 'default' argument
         self.enabled_checkbox = gr.inputs.Checkbox(False, label="Enable/Disable")
         self.enabled_checkbox.select(self.update_enabled_status)
         self.run_script_button = gr.Button(label="Run script")
