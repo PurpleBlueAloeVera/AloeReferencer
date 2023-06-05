@@ -25,10 +25,14 @@ class AloeReferencer(scripts.Script):
         self.directory_input = gr.inputs.Textbox(label='Path to the images directory')
         self.reference_image_input = gr.inputs.Image(label="Upload reference image")
         self.enabled_checkbox = gr.inputs.Checkbox(False, label="Enable/Disable")
+        self.enabled_checkbox.change(self.update_enabled_status)
         self.run_script_button = gr.Button(label="Run script")
         self.run_script_button.click(self.run)
 
         return [self.directory_input, self.reference_image_input, self.enabled_checkbox, self.run_script_button]
+
+    def update_enabled_status(self, enabled):
+        self.enabled = enabled
 
     def check_new_images(self, directory):
         current_time = time.time()
@@ -40,8 +44,7 @@ class AloeReferencer(scripts.Script):
                 return images[-1]  # Return the latest image in the directory
         return None
 
-    def run(self, directory, reference_image, enabled):
-        self.enabled = enabled
+    def run(self, directory, reference_image):
         weight = 0.5  # Default value
 
         if self.enabled:
