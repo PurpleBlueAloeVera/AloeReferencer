@@ -20,9 +20,12 @@ class AloeReferencer(scripts.Script):
     def show(self, is_txt2img):
         return scripts.AlwaysVisible
 
+    def update_enabled_status(self, checkbox_value):
+        self.enabled = checkbox_value
+
     def ui(self, _=None):
         self.directory_input = gr.inputs.Textbox(label='Path to the images directory', default=None)
-        self.reference_image_input = gr.inputs.Image(label="Upload reference image")  # remove 'default' argument
+        self.reference_image_input = gr.inputs.Image(label="Upload reference image")
         self.enabled_checkbox = gr.inputs.Checkbox(False, label="Enable/Disable")
         self.enabled_checkbox.select(self.update_enabled_status)
         self.run_script_button = gr.Button(label="Run script")
